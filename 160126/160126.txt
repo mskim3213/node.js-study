@@ -1,0 +1,76 @@
+node.js는 이벤트 기반 비동기 방식, 블로킹 i/o로 인한 waiting을 피하고자 event callback방식을 사용한다. 
+백그라운드에서 스레드 풀을 구현한다. 이벤트 큐에서 이벤트나 블록 i/o 이벤트가 얻어지면 node.js는 메인 
+이벤트 루프 스레드가 아닌, 스레드 풀에서 스레드 한 개를 꺼내어 해당 함수를 수행(worker thread). 
+이런구조로 인해 이벤트 내에 모든 잔여 이벤트들의 블로킹 i/o를 방지할 수 있다.
+
+<전역변수>
+__filename : 현재 실행 중인 코드의 파일 경로
+__dirname : 현재 실행 중인 코드의 폴더 경로
+
+<전역객체>
+console : 콘솔 화면과 관련된 기능을 다루는 객체
+exports : 모듈과 관련된 기능을 다루는 객체
+process : 프로그램과 관련된 기능을 다루는 객체
+console.log() : 출력 (%d,%s,%j 특수문자를 사용하며, 매개변수가 부족할 경우 문자열로 인식 후 출력)
+console.time(label) : 시간 측정을 시작
+console.End(label) : 시간 측정을 종료
+
+<process 객체>
+argv : 실행 매개변수
+env : 컴퓨터 환경과 관련된 정보를 나타냄
+version : Node.js 버전을 나타냄
+versions : Node.js와 종속된 프로그램 버전을 나타냄
+arch : 프로세서의 아키텍처를 나타냄
+platform : 플랫폼을 나타냄
+exit([exitCode = 0]) : "[]" 대괄호안은 생략 가능하며, 없을경우 default 값인 0으로 인식 (exit(0);과 같은 기능)
+memoryUsage() : 메모리 사용정보 객체를 리턴
+uptime() : 현재 프로그램이 실행된 시간을 리턴
+
+<export,module>
+※var module = require('./module'); 뒤에 js 확장자를 안붙일 경우 실행한 파일과 같은 폴더 내부에서 module.js 파일을 찾는다. 파일이 없다면 현재경로에서 module 폴더를 찾아 그안에 index.js파일을 추출한다.
+
+<os 모듈>
+현재 os의 해당하는 다양한 정보를 볼 수 있으나, application을 만들 때 많이 활용되지는 않는다. (os api 참조)
+
+<url 모듈>
+parse(urlStr [,parseQueryString=false,slashesDenoteHost=false]) : url 문자열을 url 객체로 변환해 리턴
+format(urlobj) : url객체를 url 문자열로 변환해 리턴
+resolve(from,to) : 매개변수를 조합하여 완전한 url 문자열을 생성해 리턴
+
+<Query String 모듈>
+stringify(obj[,sep='&',eq='=']) : 쿼리 객체를 쿼리 문자열로 변환해 리턴
+parse(str[,sep='&',eq='=']) : 쿼리 문자열을 쿼리 객체로 변환해 리턴
+
+<util 모듈>
+format() : 매개변수로 입력한 문자열을 조합해 리턴
+예) var data=util.format('%d + %d = %d',52,273,52+273);
+
+<crypto 모듈>
+사용자가 비밀번호로 로그인시 해쉬를 통해 서버로 전달되며 서버는 해쉬비교를 통해 사용자를 확인한다.
+
+<file system 모듈>
+파일 i/o와 관련된 모듈이다
+readFile(file,encoding, callback) : 파일을 비동기적으로 읽음
+readFileSync(file, encoding) : 파일을 동기적으로 읽음
+writeFile(file,data, encoding,callback) 
+writeFileSync(file,data,encoding)
+fs.appendFile(file,data,options,callback)
+callback 대신에 함수로 선언하여 error 발생 시 정해진 구문 실행 
+예) fs.readFile('textfile.txt','utf8',function (error,data){ if(error){statements~}else{statements~}
+    fs.writeFile('textfile.txt','Hello','utf8',function(error){if(error){statements~}else{statements~}
+※자바스크립트는 조건문 안에 undefined 자료형의 변수를 넣을 경우 자동으로 false로 변환된다. 만약 예외가 발생하지 않았다면
+매개변수 error에 어떠한 값도 들어가지 않으므로 else 구문을 실행합니다.
+
+<이벤트>
+Node.js 에서 가장 특징적인 부분은 이벤트 기반 비동기 프로그래밍이다. 함수 생성과 이벤트 연결이 굉장히 쉽다.
+예) <script> window.addEventListener('load',function(){}); </script>
+load : 이벤트 이름 or 이벤트 타입
+function(){} : 매개변수로 입력한 함수를 이벤트 리스너, 이벤트 핸들러
+Node.js의 경우 on함수로 대체
+위의 예로 말하자면 window.on('load',function(){});
+
+※error exception api를 보고 어떻게 작동하는지 알기
+
+
+
+
