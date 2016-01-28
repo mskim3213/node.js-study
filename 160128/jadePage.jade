@@ -1,0 +1,14 @@
+html
+	head
+		title
+			tile Index Page
+	body
+		//#header
+		h1 #{name}
+		h2= text
+		hr
+		//.article
+		- for(var i=0; i<10; i++){ 
+			p
+				a(href="http://naver.com") Go To naver #{i}
+		-}

@@ -1,0 +1,126 @@
+<ejs 모듈>
+ejs모듈은 템플릿 엔진 모듈이다. 특정 형식의 문자열을 HTML 형식의 문자열로 변환하는 모듈을 의미.
+ejs 모듈은 동적 웹페이지를 구현하기 위해 주로 사용된다.(예: 네이버 신문기사)
+index.ejs -> index.html
+render(string[,option]) : ejs 문자열 HTML 문자열로 변경하는 method
+
+<ejs 파일의 특수 태그>
+<% Code %> : js코드를 입력
+<=% value %> : 값을 출력
+
+<jade 모듈>
+jade 모듈도 ejs와 같이 템플릿 엔진 모듈이다. 두개가 주로 Node.js의 가장 많이 사용되는 프레임 워크인 
+express 프레임워크가 템플릿 엔진으로 ejs 모듈과 jade 모듈을 사용하므로 두가지를 알아놓아야 한다.
+jade 모듈도 특정 형식의 문자열을 HTML 형식의 문자열로 변환한다.
+compile(string) : jade 문자열을 HTML 문자열로 바꿀 수 있는 함수를 생성합니다.
+jade 파일 작성시 가장 중요한 것은 들여쓰기,띄어쓰기!
+jade 문서의 형식과 주석 : doctype 5 (.jade) -> <!DOCTYPE html> (.html) , //주석 (.jade) -> 
+<!-- 주석 --> (.html)
+jade 문서의 div 태그 : #header (.jade) -> <div id = "header"></div> (.html) , .article (.jade) -> 
+<div class = "article"></div> (.html)
+※zipping : 변환된 html 소스코드를 확인하면 코드가 들여쓰기 구분 없이 생성된다. 이렇게 소스 코드가 모두 
+붙어 클라이언트에 제공할 웹 페이지 용량을 줄이는 것을 zipping이라고 한다.
+
+<jade 특수기호>
+- Code : 자바스크립트 코드를 입력합니다.
+#{Value} : 데이터를 출력합니다.
+= Value : 데이터를 출력합니다.
+jade 모듈(https://github.com/pugjs/jade)
+
+<서버 실행 모듈>
+설치 : npm install -g supervisor //supervisor 모듈은 서버코드를 수정하면 자동으로 다시 실행해준다.
+       npm install -g forever //node.js 같이 단일 쓰레드기반은 예외로 인해 쓰레드가 한번 죽으면 
+서비스 전체가 죽게된다. 따라서 forever 모듈을 이용하면 이를 방지할 수 있다.
+       npm install -g express
+※서버 프로그램을 실행 할 때만 supervisor 모듈을 사용하는게 좋다. (무한루프가 돌 수 있음.)
+
+<forever method>
+forever start 코드.js : forever 모듈로 코드 실행.
+forever list : 현재 실행되고 있는 목록을 보여준다.
+forever stop 0 : 실행 목록에서 인덱스 [0]번에 해당하는 프로세스 종료.
+
+<express>
+express 모듈로 서버를 생성하면 request 객체와 response 객체에 다양한 기능이 추가된다.
+
+-response 객체의 메소드
+ send() : 매개변수의 자료형에 따라 적절한 형태로 응답한다. (매개변수 : HTML, JSON(배열), JSON(객체))
+ json() : JSON 형태로 응답합니다.
+ jsonp() : JSONP 형태로 응답합니다.
+ redirect() : 웹 페이지 경로를 강제로 이동합니다.
+
+※status 응답(예: 404, 200)은 책의 경우 response.send(status,body); 라고 기술되어있는데 이는 구버전이며 response.status(status).send(body); 로 써야함.
+
+※미들웨어란?
+express는 자체적인 최소한의 기능을 갖춘 라우팅 및 미들웨어 웹 프레임 워크이며, express 애플리케이션은 기본적으로 일련의 미들웨어 함수 호출입니다. 미들웨어 함수는 다음과 같은 태스크를 수행할 수 있습니다.
+- 모든 코드를 실행.
+- 요청 및 응답 오브젝트에 대한 변경을 실행.
+- 요청-응답 주기를 종료.
+- 스택 내의 그 다음 미들웨어 함수를 호출.
+
+-request 객체의 메서드
+ header() : 요청 헤더의 속성을 지정 또는 추출합니다.
+ accepts() : 요청 헤더의 Accept 속성을 확인합니다.
+ param() : 요청 매개변수를 추출합니다. -> app.param([name], callback) 으로 바뀜 express 4.x
+ is() : 요청 헤더의 Content-Type 속성을 확인합니다.
+
+express는 기본적으로 request 이벤트 리스너를 연결하는 데 use() 메서드를 사용, 여러 번 사용가능 하며, 
+"next();" 다음에 위치하는 함수를 의미한다.
+	- Express 모듈의 미들웨어
+Logger : 로그 정보를 출력
+Crsf : csef보안을 수행함
+Basic Auth : 기본적인 인증을 수행
+bodyParser : POST 요청 매개변수를 추출
+CookieParser : 쿠키를 분해
+Session : 세션처리 수행
+methodOverride : 다양한 요청 방식을 수행
+responseTime : 다양한 요청 방식을 수행
+Router : 페이지 라우트를 수행
+StaticCache : static 미들웨어를 위한 메모리 캐시 층을 생성
+Static : 특정 폴더를 서버의 루트 폴더에 올린다
+Directory : 서버의 디렉토리 구조를 보여줌
+Vhost : 가상 호스트를 설정 //virtual host
+Favicon : 파비콘을 생성 //shortcut icon
+Limit : POST 요청의 데이터를 제한
+errorHandler : 예외처리를 수행
+
+<logger middleware> ->4.x 버전부터 logger middleware가 거의다 없어짐
+	- logger 미들웨어의 토큰
+:req[header] : 요청 헤더를 나타 냅니다.
+:res[header] : 응답 헤더를 나타 냅니다.
+:http-version : HTTP 버전을 나타냅니다.
+:response-time : 응답시간을 나타냅니다.
+:remote-addr : 원격 주소를 나타냅니다.
+:date : 요청시간을 나타냅니다.
+:method : 요청시간을 나타냅니다.
+:url : 요청 url을 나타냅니다.
+:referrer : 이전 url을 나타냅니다.
+:User-Agent : 사용자 에이전트를 나타냅니다.
+:status : 상태 코드를 나타냅니다.
+예) app.use(express.logger(':method + :date'));
+
+	- Logger 미들웨어의 기본 형식
+'Default' :remote-addr - - [:date] ":method :url HTTP/:http-version" : status
+	     :res[contne- length] ":referrer" ":User-Agent"
+'Short' :remote-addr - :method :url HTTP/:http-version :status :res[content-length]
+         -: response-time ms
+'Tiny'  :method :url :status :res[content-length] - :response-time ms
+예) app.use(express.logger('short'));
+
+<morgan> -> 4.x 버전부터는 logger 미들웨어가 아닌 morgan으로 씀. 
+
+
+
+<static middleware>
+Static 미들웨어를 사용하면 지정한 폴더에 있는 내용을 모두 웹 서버 루트 폴더에 올린다. "__dirname" 전역변수를 사용하면 나머지는 express 모듈이 전부 알아서 해준다.
+
+※ express 3.x 버전에서 express4.x 버전으로 업데이트 후 logger의 모듈이 외부 모듈로 빠지고 morgan 모듈이 대체 하였기 때문에 앞으로 공부 방향을 책에있는 버전이 아닌 morgan api문서를 보면서 할 예정입니다. 
+
+
+
+
+
+
+
+
+
+

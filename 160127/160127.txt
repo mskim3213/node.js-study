@@ -27,7 +27,7 @@ EventEmitter 객체를 생성 : var custom = new process.EventEmitter();
 <http module>
 http는 tcp/ip를 기반으로 하는 프로토콜
 스트림 : 프로그램이 프로그램 외부와 통신할 때는 스트림을 사용, 키보드 입력이 프로그램 안으로 들어갈 때
-표준 입력 스트림(stdin). 마찬가지로 웹에서 데이터가 전송될 때도 스트림을 타고 흠
+표준 입력 스트림(stdin). 마찬가지로 웹에서 데이터가 전송될 때도 스트림을 타고 흐름
 
 <server 객체>
 listen(port[, callback])) : 서버실행
@@ -44,17 +44,18 @@ writeHead(statusCode, object) : 응답 헤더를 작성
 end([data],[encoding]) : 응답 본문을 작성
 
 <File System 모듈을 사용한 html 페이지 제공>
-MIME 형식  html : {'Content-Type' : 'image/jpeg'});
+MIME 형식  html : {'Content-Type' : 'text/html'});
 	   mp3 : {'Content-Type' : 'audio/mp3'});
 	   jpg : {'Content-Type' : 'image/jpeg'});
 	   etc : css, plain, xml, jpeg, png, mpeg
 
 <쿠키 생성>
 쿠키는 키와 값이 들어있는 작은 데이터 조각으로 이름, 값, 파기 날짜와 경로정보를 가지고 있음.
-서버와 클라이언트에서 모두 저장하고 사용한다. 주로 클라이언트에 저장한다. 이유는 서버에 모든 클라이언트의
-쿠키를 저장할 경우 과부하가 걸림.
+서버와 클라이언트에서 모두 저장하고 사용한다. 주로 클라이언트에 저장한다. 이유는 서버에 모든 클라이언트의 쿠키를 저장할 경우 과부하가 걸림.
 
 <페이지 강제 이동>
+res.writeHead(302,{'Location' : 'http://hanb.co.kr'});
+
 writeHead(statusCode, obj);
 -> statusCode list : 1xx 처리중  3xx 리다이렉트       5xx 서버오류
 		     2xx 성공    4xx 클라이언트 오류 
