@@ -28,7 +28,7 @@ router.get('/',function (req,res,next){
 	});
 });
 
-router.get('/seats',function(req,res,next){
+router.get('/seats',function(req,res,next){//이경로로 들어가면 seat변수의 jason 형식으로 볼수있음
 	res.send(seats);
 });
 
@@ -38,13 +38,13 @@ server.listen(3000,function(){
 });
 
 var io = socketio.listen(server);
-io.sockets.on('connection',function(socket){
+io.sockets.on('connection',function(socket){//예약 이벤트 핸들러
 	socket.on('reserve',function(data){
 		seats[data.y][data.x]=2;
 		io.sockets.emit('reserve',data);
 	});
-	socket.on('delete',function(data){
-		seats[data.y][data.x]=1;
-		io.sockets.emit('delete',data);
-	});
+	// socket.on('delete',function(data){//예약 삭제 핸들러
+	// 	seats[data.y][data.x]=1;
+	// 	io.sockets.emit('delete',data);
+	// });
 });
