@@ -1,0 +1,26 @@
+
+<html>
+<head>
+
+<title>����û</title>
+<meta name="decorator" content="designed_popup"/>
+<link rel="stylesheet" type="text/css" href="/share/css/error.css" />
+<script type="text/javascript" src="/share/js/common.js"></script>
+
+</head>
+<body class="bgn">
+<div id="error">
+	<p class="txt_3"><img src="/images/error/service_title3.gif" alt="��û�Ͻ� �������� �������� �ʰų� ���� �̿��� �� ���� ������ �Դϴ�."/></p>
+	<p class="mail_tel_01"><a href="mailto:webmasterkma@korea.kr"><img src="/images/error/ser_mail_tel_01.gif" alt="������: webmasterkma@korea.kr "/></a></p>
+	<!--<p class="mail_tel_02"><img src="../../images/error/ser_mail_tel_02.gif" alt="TEL: 02-2181-0423"/></p>-->
+	<ul class="menu">
+		<li><a href="http://www.kma.go.kr/index.jsp"><img src="/images/error/ser_tab_1.gif" alt="����"/></a></li>
+		<li><a href="http://www.kma.go.kr/weather/main.jsp"><img src="/images/error/ser_tab_2.gif" alt="����"/></a></li>
+		<li><a href="http://web.kma.go.kr/communication/event/kma.jsp"><img src="/images/error/ser_tab_3.gif" alt="���İ� ����"/></a></li>
+		<li><a href="http://web.kma.go.kr/notify/notice/list.jsp"><img src="/images/error/ser_tab_4.gif" alt="������ ��å"/></a></li>
+		<li><a href="http://web.kma.go.kr/aboutkma/director/greeting.jsp"><img src="/images/error/ser_tab_5.gif" alt="����û �Ұ�"/></a></li>
+		<li><a href="http://www.weather.kr/index.jsp" target="_blank" title="���� ON�� ��â���� �����ϴ�."><img src="/images/error/ser_tab_6.gif" alt="���� ON"/></a></li>
+	</ul>
+</div>
+</body>
+</html>

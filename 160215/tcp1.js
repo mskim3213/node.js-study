@@ -11,7 +11,7 @@ socket.on('end',function(){
 	console.log('client disconnected');
 });
 
-process.stdin.resume();//서버로 부터 수신한 데이터 출력
+process.stdin.resume();//서버로 부터 수신한 데이터 출
 process.stdin.on('data', function(chunk){
 	socket.write('ECHO: '+ chunk);
 });
